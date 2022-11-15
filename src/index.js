@@ -1,10 +1,10 @@
 import './style.css';
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    let resoult;
+    let result;
         async function LoadData(){
             let response = await fetch('/quotes.json');
-            resoult = await response.json();
+            result = await response.json();
         }
     
         LoadData();
@@ -21,8 +21,29 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
     
     
+        function quotesload(quotesLista){
+            let a = document.getElementById("all");
+    
+            quotesLista = quotesLista.sort((a, b) => a.author.localeCompare(b.author));
+    
+            for(let e of quotesLista){
+                let li = document.createElement("li");
+                li.innerHTML = e.author  + "\n\t-" + e.quote;
+    
+                p.appendChild(li);
+            }
+        }
+        document.getElementById("osszes").addEventListener("click", ()=>{
+            quotesload(result.quotes);
+    
+    
+    
+            LoadData();
+        })
+    
+        
        
-              });
+    });
     
   
 
